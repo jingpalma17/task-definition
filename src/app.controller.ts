@@ -1,4 +1,4 @@
-import { Controller, Get, InternalServerErrorException } from '@nestjs/common';
+import { Controller, Get, InternalServerErrorException, Res } from '@nestjs/common';
 import {
     HealthCheckService,
     DNSHealthIndicator
@@ -28,6 +28,11 @@ export class AppController {
   } 
 
     @Get('RandomStatusEnpoint')
-    async RandomStatusEnpoint(): Promise<any> {
+    async RandomStatusEnpoint(@Res() res): Promise<any> {
+      const getRandomStatusCode = () => {
+        const statusCodes = [200, 201, 301, 304, 400, 401, 403, 404, 500, 502, 503];
+        return statusCodes[Math.floor(Math.random() * statusCodes.length)];
+    };
+    res.status(getRandomStatusCode()).send();
   } 
 }
