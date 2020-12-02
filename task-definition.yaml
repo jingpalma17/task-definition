@@ -9,7 +9,7 @@ Resources:
       Handler: dist/lambda-entry-point.handler
       Runtime: nodejs12.x
       CodeUri: deploy/task-definition.zip
-      MemorySize: 1512
+      MemorySize: 5512
       Policies: AWSLambdaBasicExecutionRole
       Timeout: 60
       Events:
@@ -22,6 +22,11 @@ Resources:
 Outputs:
   TestShoppifyHealthCheckApi:
     Description: URL for application
-    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Stage/TestShoppifyHealthCheck'
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/health-check-shoppify'
     Export:
       Name: TestShoppifyHealthCheckApi
+  RandomStatusEnpointApi:
+    Description: URL for application
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/random-api-status'
+    Export:
+      Name: RandomStatusEnpointApi

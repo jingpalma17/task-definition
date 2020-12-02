@@ -7,8 +7,8 @@ Resources:
     Properties:
       Handler: dist/lambda-entry-point.handler
       Runtime: nodejs12.x
-      CodeUri: s3://jpalma-task-definition/49afd48cbc4a123801c2e481c7ffa939
-      MemorySize: 1512
+      CodeUri: s3://jpalma-task-definition/9679ee2177e42155942a45745bdf83fa
+      MemorySize: 5512
       Policies: AWSLambdaBasicExecutionRole
       Timeout: 60
       Events:
@@ -21,6 +21,12 @@ Outputs:
   TestShoppifyHealthCheckApi:
     Description: URL for application
     Value:
-      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Stage/TestShoppifyHealthCheck
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/health-check-shoppify
     Export:
       Name: TestShoppifyHealthCheckApi
+  RandomStatusEnpointApi:
+    Description: URL for application
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/random-api-status
+    Export:
+      Name: RandomStatusEnpointApi
