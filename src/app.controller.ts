@@ -1,9 +1,14 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { HealthCheck } from './entities/health-check.entity';
+import { HealthCheckService } from './health-check.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly healthCheckService: HealthCheckService,
+    private readonly appService: AppService
+  ) {}
 
   @Get()
   getHello(): string {
@@ -12,7 +17,7 @@ export class AppController {
 
 
   @Get('TestShoppifyHealthCheck')
-  TestShoppifyHealthCheck(): string {
-    return this.appService.getHello();
-  }
+    async TestShoppifyHealthCheck(): Promise<HealthCheck[]> {
+    return this.healthCheckService.getAll();
+  } 
 }

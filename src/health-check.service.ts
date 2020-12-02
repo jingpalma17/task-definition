@@ -2,10 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { HealthCheck } from '../src/entities/health-check.entity';
+import { HealthCheck } from './entities/health-check.entity';
 
 @Injectable()
-export class UsersService {
+export class HealthCheckService {
   constructor(
     @InjectRepository(HealthCheck) private healthCheckRepository: Repository<HealthCheck>,
   ) {}
