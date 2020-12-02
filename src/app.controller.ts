@@ -10,12 +10,6 @@ export class AppController {
     private readonly appService: AppService
   ) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
-
-
   @Get('TestShoppifyHealthCheck')
     async TestShoppifyHealthCheck(): Promise<HealthCheck[]> {
     return this.healthCheckService.getAll();
