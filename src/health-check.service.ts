@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { HealthCheck } from './entities/health-check.entity';
 
 @Injectable()
-export class HealthCheckService {
+export class HealthCheckService1 {
   constructor(
     @InjectRepository(HealthCheck) private healthCheckRepository: Repository<HealthCheck>,
   ) {}
