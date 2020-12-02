@@ -16,22 +16,22 @@ export class AppController {
     private readonly appService: AppService
   ) {}
 
-  @Get('TestShoppifyHealthCheck')
-    async TestShoppifyHealthCheck(): Promise<any> {
-      const healthResult =  await this.health.check(
-        [
-          () => this.dns.pingCheck('google', 'https://google.com'),
-        ],
-      );
-      await this.healthCheckService.create({ ...new HealthCheck(), url: 'https://google.com', isSuccess: healthResult.status === 'ok'});
-      return healthResult;
+  @Get('health-check-shoppify')
+  async healthCheckShoppify(): Promise<any> {
+    const healthResult =  await this.health.check(
+      [
+        () => this.dns.pingCheck('google', 'https://google.com'),
+      ],
+    );
+    await this.healthCheckService.create({ ...new HealthCheck(), url: 'https://google.com', isSuccess: healthResult.status === 'ok'});
+    return healthResult;
   } 
 
-    @Get('RandomStatusEnpoint')
-    async RandomStatusEnpoint(@Res() res): Promise<any> {
-      const getRandomStatusCode = () => {
-        const statusCodes = [200, 201, 301, 304, 400, 401, 403, 404, 500, 502, 503];
-        return statusCodes[Math.floor(Math.random() * statusCodes.length)];
+  @Get('random-api-status')
+  async randomStatusEnpoint(@Res() res): Promise<any> {
+    const getRandomStatusCode = () => {
+      const statusCodes = [200, 201, 301, 304, 400, 401, 403, 404, 500, 502, 503];
+      return statusCodes[Math.floor(Math.random() * statusCodes.length)];
     };
     res.status(getRandomStatusCode()).send();
   } 
