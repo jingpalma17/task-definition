@@ -1,0 +1,32 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Lambda with nestjs.
+
+Resources:
+  LambdaNestJSFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dist/lambda-entry-point.handler
+      Runtime: nodejs12.x
+      CodeUri: deploy/template.zip
+      MemorySize: 5512
+      Policies: AWSLambdaBasicExecutionRole
+      Timeout: 60
+      Events:
+        GetResource:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: any
+
+Outputs:
+  TestShoppifyHealthCheckApi:
+    Description: URL for application
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/health-check-shoppify'
+    Export:
+      Name: TestShoppifyHealthCheckApi
+  RandomStatusEnpointApi:
+    Description: URL for application
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/random-api-status'
+    Export:
+      Name: RandomStatusEnpointApi
